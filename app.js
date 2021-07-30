@@ -1,10 +1,18 @@
 const { response } = require('express');
 const express = require ('express');
+const logger = require('./logger');
 const Joi = require('joi');
 
 const app = express();
 
 app.use(express.json());
+
+app.use(logger);
+
+app.use(function(req, res, next){
+    console.log("Autenticación......");
+    next();
+});
 
 const usuarios = [
     {id:1, nombre:"Luis"},
